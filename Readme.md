@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @BidexTech
-- 👀 I’m interested in web app development
-- 🌱 I’m currently learning python web development
+- 👀 I’m interested in web app development and Data science
+- 🌱 I’m currently learning python web development and Data science
 - 💞️ I’m looking to collaborate on gurus
 - 📫 How to reach me 08162197471/ bidextech@yahoo.com
 
