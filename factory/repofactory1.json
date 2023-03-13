@@ -1,0 +1,9 @@
+{
+	"name": "repofactory1",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "85abed84-a045-4ba9-bfbd-d5fc6ff94804",
+		"tenantId": "3923bd95-7df4-488f-b285-37624d5618d6"
+	}
+}
