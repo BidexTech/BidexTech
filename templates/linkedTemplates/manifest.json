@@ -1,0 +1,15 @@
+{
+	"name": "linkedTemplates",
+	"description": "testing arm template",
+	"documentation": "",
+	"author": "Abidemi.Olasunkanmi@arravo.co",
+	"annotations": [],
+	"services": [],
+	"categories": [
+		"Data flow",
+		"Integration",
+		"Synapse",
+		"Analytics",
+		"Copy"
+	]
+}
