@@ -154,20 +154,20 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/SQL script 2')]",
+			"name": "[concat(parameters('workspaceName'), '/salesprocedure')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"content": {
-					"query": "-- This is auto-generated code\nSELECT\n    TOP 100 *\nFROM\n    OPENROWSET(\n        BULK 'https://datalakeuhv6et3.dfs.core.windows.net/files/sales/productsales/3D226A3B-40E6-42C2-AB81-9BBDF1A117CF_22_0-1.parquet',\n        FORMAT = 'PARQUET'\n    ) AS [result]\n",
+					"query": " USE Sales;\n GO;\n CREATE PROCEDURE sp_GetYearlySales\n AS\n BEGIN\n     -- drop existing table\n     IF EXISTS (\n             SELECT * FROM sys.external_tables\n             WHERE name = 'YearlySalesTotals'\n         )\n         DROP EXTERNAL TABLE YearlySalesTotals\n     -- create external table\n     CREATE EXTERNAL TABLE YearlySalesTotals\n     WITH (\n             LOCATION = 'sales/yearlysales/',\n             DATA_SOURCE = sales_data,\n             FILE_FORMAT = ParquetFormat\n         )\n     AS\n     SELECT YEAR(OrderDate) AS CalendarYear,\n             SUM(Quantity) AS ItemsSold,\n             ROUND(SUM(UnitPrice) - SUM(TaxAmount), 2) AS NetRevenue\n     FROM\n         OPENROWSET(\n             BULK 'sales/csv/*.csv',\n             DATA_SOURCE = 'sales_data',\n             FORMAT = 'CSV',\n             PARSER_VERSION = '2.0',\n             HEADER_ROW = TRUE\n         ) AS orders\n     GROUP BY YEAR(OrderDate)\n END\n\n  EXEC sp_GetYearlySales;",
 					"metadata": {
 						"language": "sql"
 					},
 					"currentConnection": {
-						"databaseName": "master",
+						"databaseName": "Sales",
 						"poolName": "Built-in"
 					},
-					"resultLimit": 5000
+					"resultLimit": -1
 				},
 				"type": "SqlQuery"
 			},
